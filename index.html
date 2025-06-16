@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Elijah Vazquez - Portfolio</title>
+    <link id="theme-stylesheet" rel="stylesheet" href="" />
+  </head>
+  <body>
+    <marquee behavior="alternate" scrollamount="5">
+      <h1><blink>Elijah Vazquez</blink></h1>
+    </marquee>
+    <center>
+      <h2>Front end turned full stack Rails engineer &amp; designer</h2>
+    </center>
+
+    <div class="content">
+      <table border="1" width="100%" cellpadding="8" cellspacing="0">
+        <!-- About Me -->
+        <tr>
+          <td colspan="2">
+            <h3>
+              <img
+                src="assets/icons/about.png"
+                width="48"
+                height="48"
+                alt="About"
+              />
+              About Me
+            </h3>
+            I build user-centric web apps, bridge design and code, and love
+            mentoring teammates. Over the last decade I’ve worked on rental
+            software platforms, shipping and quoting simulators, and design
+            systems that help small teams move fast without losing their minds.
+          </td>
+        </tr>
+
+        <!-- Skills & Experience -->
+        <tr>
+          <td valign="top" width="40%">
+            <h3>
+              <img
+                src="assets/icons/skills.png"
+                width="48"
+                height="48"
+                alt="Skills"
+              />
+              Skills
+            </h3>
+            <ul>
+              <li>HTML &amp; CSS/SCSS</li>
+              <li>JavaScript &amp; Stimulus</li>
+              <li>Hotwire (Turbo)</li>
+              <li>Ruby on Rails</li>
+              <li>Tailwind &amp; Shoelace</li>
+              <li>Technical Documentation</li>
+              <li>UI / UX / DX</li>
+              <li>Git</li>
+            </ul>
+          </td>
+          <td valign="top" width="60%">
+            <h3>
+              <img
+                src="assets/icons/experience.png"
+                width="48"
+                height="48"
+                alt="Experience"
+              />
+              Experience (Abbreviated)
+            </h3>
+            <table border="0" width="100%" cellpadding="4">
+              <tr>
+                <td>
+                  <h4>BoxedUp</h4>
+                  – Full Stack Engineer &amp; Designer<br />
+                  <i>Mar 2024 – Present</i><br />
+                  • Wore multiple hats: UI flows → Rails controllers → on-call
+                  triage → docs<br />
+                  • Launched a sales feature that offset a 31 % dip in rentals
+                  and drove a 68 % lift in sales revenue
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <h4>ClickFunnels</h4>
+                  – Software Engineer<br />
+                  <i>Apr 2018 – Feb 2024</i><br />
+                  • Migrated Bootstrap UI → Tailwind &amp; Stimulus; built a
+                  reusable component library<br />
+                  • Leveled up into back-end Rails via company-sponsored
+                  training
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <h4>Sagepath</h4>
+                  – Front-End Developer (Feb 2015 – Aug 2017)
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- Education -->
+        <tr>
+          <td colspan="2">
+            <h3>
+              <img
+                src="assets/icons/education.png"
+                width="48"
+                height="48"
+                alt="Education"
+              />
+              Education
+            </h3>
+            • University of Central Florida, B.A. Digital Media &amp; Design
+            (2014)<br />
+            • Valencia College, A.A. Art &amp; Science (2012)
+          </td>
+        </tr>
+
+        <!-- Contact & Resume -->
+        <tr>
+          <td>
+            <h3>
+              <img
+                src="assets/icons/contact.png"
+                width="48"
+                height="48"
+                alt="Contact"
+              />
+              Contact
+            </h3>
+            <a href="mailto:E.C.M.Vazquez@gmail.com">E.C.M.Vazquez@gmail.com</a
+            ><br />
+            <em
+              >You can also find me on
+              <a
+                class="text-grey"
+                href="https://www.linkedin.com/in/elijah-vazquez-0876a895/"
+                >LinkedIn</a
+              ></em
+            >
+          </td>
+
+          <td>
+            <h3>
+              <img
+                src="assets/icons/resume.png"
+                width="48"
+                height="48"
+                alt="Resume"
+              />
+              Resume
+            </h3>
+            <a href="assets/resume.pdf" target="_blank"
+              >Download my resume (PDF)</a
+            ><br />
+            <em>Open to full &amp; part-time roles</em>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <center>
+      <small class="copyright">© 1991–2025 Elijah Vazquez</small>
+    </center>
+
+    <script>
+      const themes = ["assets/styles/classic.css", "assets/styles/modern.css"];
+      const chosen = themes[Math.floor(Math.random() * themes.length)];
+      document.getElementById("theme-stylesheet").href = chosen;
+
+      document.addEventListener("mousemove", (e) => {
+        const img = document.createElement("img");
+        img.src = "assets/cursor.png";
+        img.className = "trail";
+        img.style.left = e.pageX - 8 + "px";
+        img.style.top = e.pageY - 8 + "px";
+        document.body.appendChild(img);
+        setTimeout(() => img.remove(), 600);
+      });
+    </script>
+  </body>
+</html>
