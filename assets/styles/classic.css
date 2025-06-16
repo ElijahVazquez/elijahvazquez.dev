@@ -39,7 +39,8 @@ h3:has(img) {
 
 /* content container */
 .content {
-  width: 650px;
+  width: calc(100% - 60px);
+  max-width: 650px;
   margin: 20px auto;
   background-color: #fdede3;
   color: #000000;
@@ -60,6 +61,9 @@ h3:has(img) {
   }
   .content table tr {
     margin-bottom: 1em;
+  }
+  .content table, .content table * {
+    border: none !important;
   }
 }
 
