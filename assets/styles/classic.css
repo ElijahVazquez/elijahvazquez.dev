@@ -30,6 +30,12 @@ marquee h1 {
   text-shadow: 1px 1px 0 #00FFFF;
 }
 
+.subtitle {
+  width: 100%;
+  max-width: 650px;
+  margin: auto;
+}
+
 h3:has(img) {
   line-height: 48px;
   display: flex;
