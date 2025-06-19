@@ -11,182 +11,162 @@
     />
   </head>
   <body>
-    <marquee behavior="alternate" scrollamount="5">
-      <h1><blink>Elijah Vazquez - Software Engineer</blink></h1>
-    </marquee>
-    <center>
+    <header>
+      <div class="marquee">
+        <h1>Elijah Vazquez - Software Engineer</h1>
+      </div>
       <h2 class="subtitle">
         Full Stack Ruby on Rails Engineer with Front End Roots and a Passion for
         User Experience
       </h2>
-    </center>
+    </header>
 
-    <div class="content">
-      <table border="1" width="100%" cellpadding="8" cellspacing="0">
-        <!-- About Me -->
-        <tr>
-          <td colspan="2">
-            <h3>
-              <img
-                src="assets/icons/about.png"
-                width="48"
-                height="48"
-                alt="About"
-              />
-              About Me
-            </h3>
-            I build user-centric web apps, bridge design and code, and love
-            mentoring teammates. Over the last decade I've worked on rental
-            software platforms, shipping and quoting simulators, and design
-            systems that help small teams move fast without losing their minds.
-          </td>
-        </tr>
+    <main class="site-content">
+      <!-- 
+        Hey there, fellow code explorer!
 
-        <!-- Skills & Experience -->
-        <tr>
-          <td valign="top" width="40%">
-            <h3>
-              <img
-                src="assets/icons/skills.png"
-                width="48"
-                height="48"
-                alt="Skills"
-              />
-              Skills
-            </h3>
-            <ul>
-              <li>Ruby on Rails</li>
-              <li>Hotwire (Turbo)</li>
-              <li>HTML &amp; CSS/SCSS</li>
-              <li>JavaScript &amp; Stimulus</li>
-              <li>Tailwind &amp; Shoelace</li>
-              <li>Technical Documentation</li>
-              <li>UI / UX / DX</li>
-              <li>Git</li>
-            </ul>
-          </td>
-          <td valign="top" width="60%">
-            <h3>
-              <img
-                src="assets/icons/experience.png"
-                width="48"
-                height="48"
-                alt="Experience"
-              />
-              Experience (Abbreviated)
-            </h3>
-            <table border="0" width="100%" cellpadding="4">
-              <tr>
-                <td>
-                  <h4>BoxedUp</h4>
-                  – Full Stack Engineer &amp; Designer<br />
-                  <i>Mar 2024 – Present</i><br />
-                  • Wore multiple hats: Figma designs → Rails development →
-                  on-call triage → docs<br />
-                  • Launched a sales feature that expanded our offerings and
-                  offset a 31% seasonal dip in rentals.
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <h4>ClickFunnels</h4>
-                  – Software Engineer<br />
-                  <i>Apr 2018 – Feb 2024</i><br />
-                  • Migrated Bootstrap UI → Tailwind &amp; Stimulus; built a
-                  reusable component library<br />
-                  • Leveled up into back-end Rails via company-sponsored
-                  training
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <h4>Sagepath</h4>
-                  – Front-End Developer (Feb 2015 – Aug 2017)
-                </td>
-              </tr>
-            </table>
-          </td>
-        </tr>
+        You're taking a peek under the hood, eh? FYI - This isn’t some hyper-engineered showcase, it's just plain HTML, CSS, and vanilla JavaScript. No code libraries, no backend to speak of, not even a framework like Vue, React, or Svelte. Every stylesheet gets a time box, so I can experiment wildly and have fun.
 
-        <!-- Education -->
-        <tr>
-          <td colspan="2">
-            <h3>
-              <img
-                src="assets/icons/education.png"
-                width="48"
-                height="48"
-                alt="Education"
-              />
-              Education
-            </h3>
-            • University of Central Florida, B.A. Digital Media &amp; Design
-            (2014)<br />
-            • Valencia College, A.A. Art &amp; Science (2012)
-          </td>
-        </tr>
+        Think of it as my personal playground: same markup, endless looks. Thanks for stopping by—and happy snooping!
+      -->
+      <!-- About Me -->
+      <section id="about" class="about">
+        <h3>
+          <img src="assets/icons/about.png" width="48" height="48" alt="" />
+          About Me
+        </h3>
+        <p>
+          I build user-centric web apps, bridge design and code, and love
+          mentoring teammates. Over the last decade I've worked on rental
+          software platforms, shipping and quoting simulators, and design
+          systems that help small teams move fast without losing their minds.
+        </p>
+      </section>
 
-        <!-- Contact & Resume -->
-        <tr>
-          <td>
-            <h3>
-              <img
-                src="assets/icons/contact.png"
-                width="48"
-                height="48"
-                alt="Contact"
-              />
-              Contact
-            </h3>
-            <a href="mailto:E.C.M.Vazquez@gmail.com">E.C.M.Vazquez@gmail.com</a
-            ><br />
-            <em
-              >You can also find me on
-              <a
-                class="text-grey"
-                href="https://www.linkedin.com/in/elijah-vazquez-0876a895/"
-                >LinkedIn</a
-              ></em
-            >
-          </td>
+      <section id="skills" class="skills">
+        <h3>
+          <img src="assets/icons/skills.png" width="48" height="48" alt="" />
+          Skills
+        </h3>
+        <ul>
+          <li>Ruby on Rails</li>
+          <li>Hotwire (Turbo & Stimulus)</li>
+          <li>HTML & CSS/SCSS</li>
+          <li>JavaScript</li>
+          <li>Tailwind & Shoelace</li>
+          <li>Technical Documentation</li>
+          <li>UI / UX / DX</li>
+          <li>Git</li>
+        </ul>
+      </section>
 
-          <td>
-            <h3>
-              <img
-                src="assets/icons/resume.png"
-                width="48"
-                height="48"
-                alt="Resume"
-              />
-              Resume
-            </h3>
-            <a href="assets/resume.pdf" target="_blank"
-              >Download my resume (PDF)</a
-            ><br />
-            <em>Open to full &amp; part-time roles</em>
-          </td>
-        </tr>
-      </table>
-    </div>
+      <section id="experience" class="experience">
+        <h3>
+          <img
+            src="assets/icons/experience.png"
+            width="48"
+            height="48"
+            alt=""
+          />
+          Experience (Abbreviated)
+        </h3>
 
-    <center>
+        <article>
+          <h4>BoxedUp</h4>
+          <time datetime="2024-03">Mar 2024 - Present</time>
+          <ul>
+            <li>
+              Wore multiple hats: Figma designs → Rails development → on-call
+              triage → docs
+            </li>
+            <li>
+              Launched a sales feature that expanded our offerings and offset a
+              31% seasonal dip in rentals
+            </li>
+          </ul>
+        </article>
+
+        <article>
+          <h4>ClickFunnels</h4>
+          <time datetime="2018-04">Apr 2018 - Feb 2024</time>
+          <ul>
+            <li>
+              Migrated Bootstrap UI to Tailwind & Stimulus; built a reusable
+              component library
+            </li>
+            <li>
+              Leveled up into back-end Rails via company-sponsored training
+            </li>
+          </ul>
+        </article>
+
+        <article>
+          <h4>Sagepath</h4>
+          <time datetime="2015-02">Feb 2015 - Aug 2017</time>
+          <ul>
+            <li>Front-end Developer</li>
+          </ul>
+        </article>
+      </section>
+
+      <!-- Education -->
+      <section id="education" class="education">
+        <h3>
+          <img src="assets/icons/education.png" width="48" height="48" alt="" />
+          Education
+        </h3>
+        <ul>
+          <li>
+            University of Central Florida, B.A. Digital Media &amp; Design
+            (2014)
+          </li>
+          <li>Valencia College, A.A. Art &amp; Science (2012)</li>
+        </ul>
+      </section>
+
+      <section class="contact">
+        <h3>
+          <img src="assets/icons/contact.png" width="48" height="48" alt="" />
+          Contact
+        </h3>
+        <p>
+          <a href="mailto:E.C.M.Vazquez@gmail.com">E.C.M.Vazquez@gmail.com</a
+          ><br />
+          <em
+            >You can also find me on
+            <a
+              href="https://www.linkedin.com/in/elijah-vazquez-0876a895/"
+              class="text-grey"
+              >LinkedIn</a
+            ></em
+          >
+        </p>
+      </section>
+
+      <section class="resume">
+        <h3>
+          <img src="assets/icons/resume.png" width="48" height="48" alt="" />
+          Resume
+        </h3>
+        <p>
+          <a href="assets/resume.pdf" target="_blank"
+            >Download my resume (PDF)</a
+          ><br />
+          <em>Open to full & part-time roles</em>
+        </p>
+      </section>
+    </main>
+
+    <footer>
       <small class="copyright">© 1991–2025 Elijah Vazquez</small>
-    </center>
+      <p class="silly-note">
+        What are you doing all the way down here? The good stuff is up there!
+      </p>
+    </footer>
 
-    <script>
-      // const themes = ["assets/styles/classic.css", "assets/styles/modern.css"];
-      // const chosen = themes[Math.floor(Math.random() * themes.length)];
-      // document.getElementById("theme-stylesheet").href = chosen;
-
-      document.addEventListener("mousemove", (e) => {
-        const img = document.createElement("img");
-        img.src = "assets/cursor.png";
-        img.className = "trail";
-        img.style.left = e.pageX - 8 + "px";
-        img.style.top = e.pageY - 8 + "px";
-        document.body.appendChild(img);
-        setTimeout(() => img.remove(), 600);
-      });
-    </script>
+    <!-- Version Switcher -->
+    <button id="version-switcher">Do Not Push</button>
+    <script src="assets/javascript/main.js" defer></script>
+    <script id="scripts"></script>
   </body>
 </html>

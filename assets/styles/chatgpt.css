@@ -1,0 +1,226 @@
+/* chatgpt.css — Neon-Grid Explosion Theme v2 */
+
+/* 0. Box-sizing reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* 1. Root palette & variables */
+:root {
+  --bg-color: #1a002b;
+  --fg-color: #e0f7fa;
+  --neon-cyan: #00fff6;
+  --neon-magenta: #ff00d0;
+  --grid-line: rgba(0,255,246,0.2);
+  --spacing: 1.5rem;
+  --radius: 6px;
+  --font-fam: 'Courier New', Courier, monospace;
+  --link-color: #66f0e5;
+  --link-hover: #ffffff;
+}
+
+/* 2. Body & animated background grid */
+body {
+  font-family: var(--font-fam);
+  background: var(--bg-color);
+  color: var(--fg-color);
+  line-height: 1.6;
+  position: relative;
+  overflow-x: hidden;
+}
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 50px 50px;
+  z-index: -2;
+  animation: grid-shift 60s linear infinite;
+}
+@keyframes grid-shift {
+  from { background-position: 0 0; }
+  to   { background-position: 50px 50px; }
+}
+
+/* 3. Header neon glow & wiggle */
+header {
+  text-align: center;
+  margin-bottom: var(--spacing);
+  animation: header-wiggle 4s ease-in-out infinite alternate;
+}
+@keyframes header-wiggle {
+  from { transform: translateX(-2px) skewX(-1deg); }
+  to   { transform: translateX(2px) skewX(1deg); }
+}
+header h1 {
+  font-size: 2.8rem;
+  color: var(--neon-magenta);
+  text-shadow:
+    0 0 4px var(--neon-magenta),
+    0 0 8px var(--neon-magenta),
+    0 0 16px var(--neon-magenta);
+}
+header .subtitle {
+  font-size: 1.2rem;
+  color: var(--neon-cyan);
+  text-shadow: 0 0 4px var(--neon-cyan);
+  margin-top: 0.5rem;
+}
+
+/* 4. Main grid layout */
+main.site-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+  gap: var(--spacing);
+  padding: 0 var(--spacing);
+}
+
+/* 5. Section styling—no boxes, just underlines */
+section {
+  padding-bottom: var(--spacing);
+  border-bottom: 2px dashed var(--neon-cyan);
+}
+section:last-child {
+  border-bottom: none;
+}
+
+/* 6. Section headers neon underline */
+section h3 {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.4rem;
+  color: var(--neon-cyan);
+  margin-bottom: 0.5rem;
+}
+section h3::after {
+  content: '';
+  flex: 1;
+  height: 2px;
+  background: var(--neon-cyan);
+  margin-left: 0.75rem;
+  animation: neon-flash 2s ease-in-out infinite alternate;
+}
+section h3 img {
+  width: 32px;
+  height: 32px;
+  filter: drop-shadow(0 0 4px var(--neon-cyan));
+}
+@keyframes neon-flash {
+  from { opacity: 0.5; }
+  to   { opacity: 1; }
+}
+
+/* 7. Paragraphs & lists with aligned sparkle bullets */
+section p {
+  margin-top: 0.75rem;
+}
+section ul {
+  margin-top: 0.75rem;
+  list-style: none;
+}
+section ul li {
+  position: relative;
+  padding-left: 1.75em;
+  margin-bottom: 0.5em;
+}
+section ul li::before {
+  content: '★';
+  position: absolute;
+  left: 0;
+  color: var(--neon-magenta);
+  text-shadow: 0 0 4px var(--neon-magenta);
+}
+
+/* 8. Experience articles flow inline */
+.experience article {
+  margin-top: 1rem;
+}
+.experience article h4 {
+  font-size: 1.1rem;
+  color: var(--neon-magenta);
+  text-shadow: 0 0 3px var(--neon-magenta);
+}
+.experience article time {
+  display: block;
+  font-size: 0.9rem;
+  font-style: italic;
+  margin-bottom: 0.5rem;
+  color: var(--fg-color);
+}
+
+/* 9. Links */
+a {
+  color: var(--link-color);
+  text-decoration: underline;
+}
+a:hover {
+  color: var(--link-hover);
+}
+
+/* 10. Footer neon marquee effect */
+footer {
+  text-align: center;
+  margin-top: var(--spacing);
+}
+footer .copyright {
+  font-size: 0.9rem;
+  color: var(--fg-color);
+  white-space: nowrap;
+  overflow: hidden;
+}
+footer .copyright::after {
+  content: ' This version was styled entirely by ChatGPT without design direction';
+  display: block;
+  animation: footer-marquee 30s linear infinite;
+  margin-left: 0.5rem;
+  color: var(--neon-cyan);
+}
+@keyframes footer-marquee {
+  0%   { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+footer .silly-note {
+  display: none;
+}
+
+/* 11. Version switcher neon orb */
+#version-switcher {
+  position: fixed;
+  bottom: var(--spacing);
+  right: var(--spacing);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 3px solid var(--neon-magenta);
+  background: radial-gradient(circle at center, var(--neon-cyan), transparent 80%);
+  color: var(--bg-color);
+  font-size: 0.7rem;
+  cursor: pointer;
+  box-shadow:
+    0 0 8px var(--neon-magenta),
+    inset 0 0 6px var(--neon-cyan);
+  animation: orb-glow 3s ease-in-out infinite alternate;
+}
+@keyframes orb-glow {
+  from { transform: scale(1); }
+  to   { transform: scale(1.1); }
+}
+
+/* 12. Hide legacy marquee */
+.marquee {
+  display: none !important;
+}
+
+/* 13. Responsive tweaks */
+@media (max-width: 600px) {
+  header h1 { font-size: 2rem; }
+  section h3 { font-size: 1.2rem; }
+  section ul li { padding-left: 1.4em; }
+}

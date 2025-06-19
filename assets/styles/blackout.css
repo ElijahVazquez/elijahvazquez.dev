@@ -1,0 +1,222 @@
+/* blackout.css — Black-and-white “flashlight” theme based on classic.css */
+
+/* 0. Variables */
+:root {
+  --black: #000000;
+  --white: #ffffff;
+  --border-width: 3px;
+  --cursor-img: url('../icons/flashlight.png') 8 8, auto;
+  /* flashlight spotlight vars */
+  --spot-r: 120px;   /* radius of reveal circle */
+  --spot-x: calc(100vw - 20px);
+  --spot-y: calc(100vh - 20px);
+}
+
+/* 1. Base page colors & cursor */
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--black);
+  color: var(--white);
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  cursor: var(--cursor-img);
+}
+
+/* 2. Flashlight overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+
+  /* 
+    Up to spot‐radius: semi-transparent yellow 
+    Beyond spot‐radius: nearly-opaque black 
+  */
+  background: radial-gradient(
+    circle var(--spot-r) at var(--spot-x) var(--spot-y),
+    rgba(255,255,200,0.3) 0%,
+    rgba(255,255,200,0.3) var(--spot-r),
+    rgba(0,0,0,0.98)    var(--spot-r),
+    rgba(0,0,0,0.98)    100%
+  );
+  transition: background-position 0.05s ease-out;
+}
+
+/* 3. Headings */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0.5em 0 0.2em;
+}
+
+/* 4. Marquee & subtitle */
+.marquee h1 {
+  text-align: center;
+  margin: 20px auto;
+  padding: 10px;
+  font-size: 32px;
+  color: var(--white);
+}
+h2.subtitle {
+  max-width: 650px;
+  margin: 0 auto 20px;
+  text-align: center;
+  color: var(--white);
+}
+
+/* 5. Section headers with icons */
+h3:has(img) {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  line-height: 48px;
+  color: var(--white);
+}
+h3:has(img) img {
+  filter: drop-shadow(0 0 5px white);
+}
+
+/* 6. Main grid wrapper */
+main.site-content {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-auto-rows: auto;
+  max-width: 650px;
+  width: calc(100% - 60px);
+  margin: 0 auto 20px;
+  border: 12px solid var(--white);
+  padding: 12px;
+  background: transparent;
+}
+
+/* 7. Panels */
+.about,
+#skills,
+#experience,
+#education,
+.contact,
+.resume {
+  padding: 8px;
+  margin: 0;
+  border: var(--border-width) solid var(--white);
+  background: transparent;
+}
+
+/* 7a. Remove bottom border where needed */
+.about,
+#skills,
+#experience,
+#education {
+  border-bottom: none;
+}
+
+/* 7b. Full-span panels */
+.about,
+#education {
+  grid-column: 1 / -1;
+}
+
+/* 7c. Two-and-three splits */
+#skills {
+  grid-column: 1 / span 2;
+}
+#experience {
+  grid-column: 3 / span 3;
+  border-left: none;
+}
+
+/* 7d. Contact & resume */
+.contact {
+  grid-column: 1 / span 2;
+  border-right: none;
+}
+.resume {
+  grid-column: 3 / span 3;
+}
+
+/* 8. Body copy & lists */
+main.site-content section p {
+  margin: 0;
+  color: var(--white);
+}
+main.site-content section ul {
+  list-style-type: square;
+  margin-bottom: 1em;
+  padding-left: 16px;
+  color: var(--white);
+  font-family: 'Times New Roman', Times, serif;
+}
+
+/* 9. Experience articles */
+.experience article {
+  border: var(--border-width) solid var(--white);
+  border-bottom: none;
+  padding: 8px;
+  background: transparent;
+}
+.experience article:last-child {
+  border-bottom: var(--border-width) solid var(--white);
+}
+.experience article h4,
+.experience article h3 {
+  margin-bottom: 0.2em;
+  color: var(--white);
+}
+.experience article time {
+  display: block;
+  font-style: italic;
+  margin-bottom: 0.5em;
+  color: var(--white);
+}
+
+/* 10. Footer */
+footer {
+  text-align: center;
+  margin-bottom: 20px;
+  color: var(--white);
+}
+footer .copyright {
+  display: block;
+}
+footer .silly-note {
+  display: none;
+}
+
+/* 11. Version switcher button */
+button#version-switcher {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 75px;
+  height: 75px;
+  padding: 12px 10px 10px;
+  cursor: pointer;
+  background: linear-gradient(0deg, rgba(255,255,255,0.2), rgba(255,255,255,1));
+  border: 5px solid grey;
+  border-radius: 50%;
+  color: var(--black);
+  transition: all 0.3s ease-out;
+}
+button#version-switcher:active {
+  background: linear-gradient(0deg, rgba(255,255,255,1), rgba(255,255,255,0.2));
+}
+
+/* 12. Responsive stacking */
+@media screen and (max-width: 600px) {
+  main.site-content {
+    grid-template-columns: 1fr !important;
+  }
+  main.site-content section {
+    grid-column: 1 / -1 !important;
+  }
+  main.site-content * {
+    border: none !important;
+  }
+  .skills ul {
+    columns: 2;
+  }
+}
+
+
+/* <a target="_blank" href="https://icons8.com/icon/q7brDWng4jNt/flash-light">Flashlight</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a> */
