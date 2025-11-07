@@ -501,6 +501,14 @@ footer .silly-note::before {
   transform: scale(0.95);
 }
 
+#version-switcher:focus {
+  background: rgba(51, 255, 51, 0.1);
+  border: 2px solid var(--crt-amber);
+  color: var(--crt-green-bright);
+  box-shadow: 0 0 20px var(--crt-amber), inset 0 0 10px rgba(51, 255, 51, 0.2);
+  outline: none;
+}
+
 /* Blinking cursor */
 .cursor {
   display: inline-block;
