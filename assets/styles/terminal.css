@@ -411,12 +411,7 @@ footer .copyright {
 }
 
 footer .silly-note {
-  display: inline-block;
-  margin-top: var(--spacing-md);
-  padding: var(--spacing-xs) var(--spacing-md);
-  border: 1px dashed var(--crt-green-dim);
-  color: var(--crt-green-dim);
-  font-size: 0.8rem;
+  display: none;
 }
 
 footer .silly-note::before {
