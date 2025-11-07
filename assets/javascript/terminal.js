@@ -389,9 +389,11 @@
       }
     }, 100);
 
-    function typeNodes(nodes, nodeIndex) {
+    function typeNodes(nodes, nodeIndex, parentElement = element) {
       if (nodeIndex >= nodes.length) {
-        cursor.remove();
+        if (parentElement === element) {
+          cursor.remove();
+        }
         return;
       }
 
@@ -404,32 +406,110 @@
 
         function typeChar() {
           if (charIndex < text.length) {
-            element.insertBefore(document.createTextNode(text.charAt(charIndex)), cursor);
+            if (parentElement === element) {
+              element.insertBefore(document.createTextNode(text.charAt(charIndex)), cursor);
+            } else {
+              parentElement.appendChild(document.createTextNode(text.charAt(charIndex)));
+            }
             charIndex++;
             setTimeout(typeChar, speed);
           } else {
             // Move to next node
-            typeNodes(nodes, nodeIndex + 1);
+            typeNodes(nodes, nodeIndex + 1, parentElement);
           }
         }
         typeChar();
       } else if (node.nodeType === Node.ELEMENT_NODE) {
-        // Fade in element nodes (a, em, etc)
-        const clonedNode = node.cloneNode(true);
-        clonedNode.style.opacity = '0';
-        element.insertBefore(clonedNode, cursor);
+        const tagName = node.nodeName.toLowerCase();
 
-        setTimeout(() => {
-          clonedNode.style.opacity = '1';
-        }, 50);
+        // Check if element has children (nested content)
+        if (node.childNodes.length > 0 && (tagName === 'em' || tagName === 'strong')) {
+          // Create container element for em/strong and recursively type its children
+          const container = document.createElement(tagName);
+          element.insertBefore(container, cursor);
 
-        setTimeout(() => {
-          typeNodes(nodes, nodeIndex + 1);
-        }, 350); // Wait for fade to complete
+          // Recursively type children of this element
+          const childNodesArray = Array.from(node.childNodes);
+          typeChildrenThenContinue(childNodesArray, container, () => {
+            typeNodes(nodes, nodeIndex + 1, parentElement);
+          });
+        } else {
+          // Fade in standalone element nodes (links, br, etc)
+          const clonedNode = node.cloneNode(true);
+
+          if (tagName === 'a') {
+            clonedNode.style.opacity = '0';
+            clonedNode.style.transition = 'opacity 0.3s ease';
+          }
+
+          element.insertBefore(clonedNode, cursor);
+
+          if (tagName === 'a') {
+            setTimeout(() => {
+              clonedNode.style.opacity = '1';
+            }, 50);
+
+            setTimeout(() => {
+              typeNodes(nodes, nodeIndex + 1, parentElement);
+            }, 350);
+          } else {
+            // br or other simple elements, continue immediately
+            typeNodes(nodes, nodeIndex + 1, parentElement);
+          }
+        }
       } else {
         // Skip other node types
-        typeNodes(nodes, nodeIndex + 1);
+        typeNodes(nodes, nodeIndex + 1, parentElement);
       }
+    }
+
+    function typeChildrenThenContinue(childNodes, container, callback) {
+      let childIndex = 0;
+
+      function processChild() {
+        if (childIndex >= childNodes.length) {
+          callback();
+          return;
+        }
+
+        const child = childNodes[childIndex];
+
+        if (child.nodeType === Node.TEXT_NODE) {
+          const text = child.textContent;
+          let charIndex = 0;
+
+          function typeChar() {
+            if (charIndex < text.length) {
+              container.appendChild(document.createTextNode(text.charAt(charIndex)));
+              charIndex++;
+              setTimeout(typeChar, speed);
+            } else {
+              childIndex++;
+              processChild();
+            }
+          }
+          typeChar();
+        } else if (child.nodeType === Node.ELEMENT_NODE && child.nodeName.toLowerCase() === 'a') {
+          const clonedLink = child.cloneNode(true);
+          clonedLink.style.opacity = '0';
+          clonedLink.style.transition = 'opacity 0.3s ease';
+          container.appendChild(clonedLink);
+
+          setTimeout(() => {
+            clonedLink.style.opacity = '1';
+          }, 50);
+
+          setTimeout(() => {
+            childIndex++;
+            processChild();
+          }, 350);
+        } else {
+          childIndex++;
+          processChild();
+        }
+      }
+
+      processChild();
     }
   }
 
