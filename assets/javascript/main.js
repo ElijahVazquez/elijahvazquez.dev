@@ -4,7 +4,8 @@
 const themes = [
   "modern",
   "classic",
-  "blackout"
+  "blackout",
+  "magazine"
 ];
 
 const linkEl = document.getElementById("theme-stylesheet");
@@ -47,16 +48,27 @@ function applyTheme(name) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  // 1) Initial load → classic
-  let current = themes[0];
-  applyTheme(current);
+  // Filter out blackout theme on mobile (relies on mouse hover)
+  const MOBILE_BREAKPOINT = 768;
 
-  // 2) On button click → pick a different random theme and scroll to top
+  function getAvailableThemes() {
+    if (window.innerWidth <= MOBILE_BREAKPOINT) {
+      return themes.filter(theme => theme !== 'blackout');
+    }
+    return themes;
+  }
+
+  // 1) Initial load → first theme
+  let availableThemes = getAvailableThemes();
+  let currentIndex = 0;
+  applyTheme(availableThemes[currentIndex]);
+
+  // 2) On button click → cycle to next theme in order and scroll to top
   btn.addEventListener("click", () => {
-    const others = themes.filter(n => n !== current);
-    const next   = others[Math.floor(Math.random() * others.length)];
-    current      = next;
-    applyTheme(next);
+    // Refresh available themes in case window was resized
+    availableThemes = getAvailableThemes();
+    currentIndex = (currentIndex + 1) % availableThemes.length;
+    applyTheme(availableThemes[currentIndex]);
 
     // Scroll to top smoothly
     window.scrollTo({

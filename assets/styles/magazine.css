@@ -1,0 +1,511 @@
+/* magazine.css — Editorial Magazine Horizontal Scroll Theme */
+
+:root {
+  /* Editorial color palette */
+  --bg-cream: #f5f1e8;
+  --bg-paper: #fdfcf7;
+  --text-primary: #1a1a1a;
+  --text-secondary: #4a4a4a;
+  --accent-red: #c4333c;
+  --accent-burgundy: #8b2635;
+  --border-dark: #2a2a2a;
+  --border-light: #d4cfc0;
+
+  /* Typography - Editorial style */
+  --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "SF Mono", Monaco, Consolas, monospace;
+
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2.5rem;
+  --spacing-xl: 4rem;
+
+  /* Layout */
+  --section-width: 85vw;
+  --section-max-width: 1400px;
+}
+
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body { overscroll-behavior-x: contain; overscroll-behavior-y: none; }
+
+html {
+  scroll-behavior: auto;
+}
+
+/* Horizontal scroll container */
+body {
+  background: var(--bg-cream);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.7;
+  overflow-x: auto;
+  overflow-y: hidden;
+  height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+}
+
+/* Horizontal layout wrapper */
+body > * {
+  flex-shrink: 0;
+}
+
+/* Header - First panel */
+header {
+  width: var(--section-width);
+  max-width: var(--section-max-width);
+  min-width: var(--section-width);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: var(--spacing-xl);
+  background: var(--bg-paper);
+  border-right: 3px solid var(--border-dark);
+  position: relative;
+  flex-shrink: 0;
+}
+
+header::before {
+  content: 'VOL. 2025';
+  position: absolute;
+  top: var(--spacing-lg);
+  right: var(--spacing-lg);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.marquee h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 700;
+  line-height: 0.95;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-md);
+  letter-spacing: -0.02em;
+}
+
+h2.subtitle {
+  font-family: var(--font-sans);
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  max-width: 700px;
+  border-left: 4px solid var(--accent-red);
+  padding-left: var(--spacing-md);
+  margin-top: var(--spacing-lg);
+}
+
+/* Main content - horizontal sections */
+main.site-content {
+  display: inline-flex;
+  height: 100vh;
+  gap: 0;
+}
+
+/* Section panels */
+section {
+  width: var(--section-width);
+  max-width: var(--section-max-width);
+  min-width: var(--section-width);
+  height: 100vh;
+  padding: var(--spacing-xl);
+  background: var(--bg-paper);
+  border-right: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow-y: auto;
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* Alternating section backgrounds */
+section:nth-child(odd) {
+  background: var(--bg-cream);
+}
+
+section:nth-child(even) {
+  background: var(--bg-paper);
+}
+
+/* Section numbers - editorial style */
+section::before {
+  content: attr(data-section);
+  position: absolute;
+  top: var(--spacing-sm);
+  left: var(--spacing-md);
+  font-family: var(--font-serif);
+  font-size: 5rem;
+  font-weight: 700;
+  color: var(--accent-red);
+  opacity: 0.3;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.about::before { content: '01'; }
+#skills::before { content: '02'; }
+#experience::before { content: '03'; }
+#education::before { content: '04'; }
+.contact::before { content: '05'; }
+.resume::before { content: ''; }
+
+/* Combined Contact & Resume section */
+.contact,
+.resume {
+  width: calc(var(--section-width) / 2);
+  min-width: calc(var(--section-width) / 2);
+  border-right: none;
+}
+
+.contact {
+  border-right: 2px solid var(--border-dark);
+}
+
+.resume {
+  background: var(--bg-cream);
+  border-right: 1px solid var(--border-light);
+}
+
+.contact h3,
+.resume h3 {
+  font-size: 2rem;
+}
+
+/* Section headers */
+h3 {
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  border-bottom: 2px solid var(--border-dark);
+  padding-bottom: var(--spacing-sm);
+}
+
+h3 img {
+  display: none;
+}
+
+/* Typography */
+h4 {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-xs);
+}
+
+p {
+  font-family: var(--font-sans);
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: var(--spacing-md);
+  max-width: 65ch;
+}
+
+/* Links */
+a {
+  color: var(--accent-red);
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+a:hover {
+  border-bottom-color: var(--accent-red);
+}
+
+/* Lists */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+/* Skills - Magazine column layout */
+#skills ul {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+}
+
+#skills li {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  color: var(--text-primary);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--bg-cream);
+  border-left: 3px solid var(--accent-burgundy);
+  transition: all 0.2s ease;
+}
+
+#skills li:hover {
+  border-left-width: 6px;
+  transform: translateX(3px);
+}
+
+/* Education & Experience lists */
+#education ul,
+.experience ul {
+  margin-top: var(--spacing-md);
+  padding-left: var(--spacing-md);
+}
+
+#education li,
+.experience li {
+  font-family: var(--font-sans);
+  color: var(--text-secondary);
+  padding: 0 0 var(--spacing-xs) 0;
+  position: relative;
+  line-height: 1.3;
+}
+
+#education li::before,
+.experience li::before {
+  content: '•';
+  color: var(--accent-red);
+  position: absolute;
+  left: calc(-1 * var(--spacing-md));
+  font-size: 1.5rem;
+  line-height: 0.8;
+}
+
+/* Experience articles */
+.experience article {
+  border: 2px solid var(--border-light);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  background: var(--bg-paper);
+  transition: all 0.3s ease;
+}
+
+.experience article:hover {
+  border-color: var(--accent-red);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.experience article time {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--accent-red);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--spacing-sm);
+}
+
+.experience article ul {
+  margin-top: var(--spacing-sm);
+  padding-left: var(--spacing-md);
+}
+
+/* Text utilities */
+.text-grey {
+  color: var(--text-secondary);
+}
+
+em {
+  font-style: italic;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+/* Footer - last panel */
+footer {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50vw;
+  min-width: 600px;
+  height: 100vh;
+  padding: var(--spacing-xl);
+  background: var(--border-dark);
+  color: var(--bg-paper);
+  text-align: center;
+  flex-shrink: 0;
+}
+
+footer .copyright {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  margin-bottom: var(--spacing-sm);
+  color: var(--bg-cream);
+}
+
+footer .silly-note {
+  display: none;
+}
+
+/* Version switcher button */
+#version-switcher {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 80px;
+  height: 80px;
+  border-radius: 2px;
+  border: 2px solid var(--accent-red);
+  background: var(--bg-paper);
+  color: var(--accent-red);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--spacing-sm);
+  line-height: 1.2;
+  z-index: 100;
+}
+
+#version-switcher:hover {
+  background: var(--accent-red);
+  color: var(--bg-paper);
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(196, 51, 60, 0.3);
+}
+
+#version-switcher:active {
+  transform: scale(0.95);
+}
+
+/* Scrollbar styling for editorial feel */
+::-webkit-scrollbar {
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-cream);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-burgundy);
+  border: 2px solid var(--bg-cream);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-red);
+}
+
+/* Responsive - vertical on mobile */
+@media (max-width: 768px) {
+  /* Reset body for vertical scrolling */
+  body {
+    display: block;
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: auto;
+  }
+
+  /* Structural elements stack vertically */
+  header,
+  main.site-content,
+  footer {
+    display: block;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+    height: auto !important;
+    min-height: auto !important;
+  }
+
+  /* Header: full viewport welcome */
+  header {
+    min-height: 100vh;
+    padding: var(--spacing-lg) var(--spacing-md);
+    border-right: none;
+    border-bottom: 3px solid var(--border-dark);
+  }
+
+  /* Main content: vertical flow */
+  main.site-content {
+    display: block;
+    height: auto;
+  }
+
+  /* Sections: flexible height, min 50vh for breathing room */
+  section {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+    height: auto !important;
+    min-height: 50vh;
+    padding: var(--spacing-lg) var(--spacing-md);
+    border-right: none;
+    border-bottom: 2px solid var(--border-light);
+    justify-content: flex-start;
+  }
+
+  /* Remove horizontal split for contact/resume */
+  .contact,
+  .resume {
+    width: 100% !important;
+    min-width: 100% !important;
+    border-right: none;
+  }
+
+  /* Footer: compact */
+  footer {
+    min-height: 50vh;
+    padding: var(--spacing-lg) var(--spacing-md);
+    border-right: none;
+  }
+
+  /* Typography adjustments */
+  .marquee h1 {
+    font-size: 2.5rem;
+  }
+
+  h2.subtitle {
+    font-size: 1.125rem;
+  }
+
+  section::before {
+    font-size: 3rem;
+    opacity: 0.15;
+  }
+
+  h3 {
+    font-size: 1.75rem;
+  }
+
+  /* Skills single column */
+  #skills ul {
+    grid-template-columns: 1fr;
+  }
+
+  /* Smaller button */
+  #version-switcher {
+    width: 60px;
+    height: 60px;
+    font-size: 0.65rem;
+    bottom: 20px;
+    right: 20px;
+  }
+}
