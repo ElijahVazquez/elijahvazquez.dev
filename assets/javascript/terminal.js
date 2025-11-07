@@ -37,13 +37,16 @@
 
     main.insertBefore(menu, main.firstChild);
 
-    // Add click handlers for mobile
+    // Add click handlers for mobile only
     const menuItems = menu.querySelectorAll('li');
     menuItems.forEach((item, index) => {
       item.addEventListener('click', () => {
-        currentIndex = index;
-        updateSelection();
-        openSection();
+        // Only allow clicks on mobile
+        if (window.innerWidth <= 768) {
+          currentIndex = index;
+          updateSelection();
+          openSection();
+        }
       });
     });
 
@@ -81,10 +84,17 @@
 
   function handleKeyPress(e) {
     if (isInSection) {
-      // In section view - Esc to go back
+      // In section view - Esc to go back, Enter on back button
       if (e.key === 'Escape') {
         e.preventDefault();
         closeSection();
+      } else if (e.key === 'Enter') {
+        // Allow Enter to work on focused back button
+        const backButton = document.querySelector('.back-button');
+        if (document.activeElement === backButton) {
+          e.preventDefault();
+          closeSection();
+        }
       }
     } else {
       // In menu view - Arrow keys, Tab, and Enter
@@ -207,6 +217,7 @@
 
     // Fade in section
     setTimeout(() => {
+      sectionEl.style.opacity = ''; // Reset any inline opacity from previous close
       sectionEl.classList.add('active');
       setTimeout(() => {
         typeCatCommand(sectionEl);
@@ -281,14 +292,19 @@
       backBtn = document.createElement('button');
       backBtn.className = 'back-button';
       backBtn.textContent = 'back (or press Esc)';
-      backBtn.addEventListener('click', closeSection);
+      backBtn.addEventListener('click', () => {
+        // Only allow clicks on mobile
+        if (window.innerWidth <= 768) {
+          closeSection();
+        }
+      });
       sectionEl.appendChild(backBtn);
     }
 
-    // Hide content initially for typing effect
+    // Hide content initially for typing effect (remove from layout to prevent jumps)
     const elementsToType = sectionEl.querySelectorAll('h3, h4, p, li, time');
     elementsToType.forEach(el => {
-      el.style.opacity = '0';
+      el.style.display = 'none';
     });
   }
 
@@ -349,7 +365,7 @@
   function typeElement(element, speed, callback) {
     const text = element.textContent;
     element.textContent = '';
-    element.style.opacity = '1';
+    element.style.display = 'block';
 
     // Create blinking cursor
     const cursor = document.createElement('span');
@@ -461,7 +477,7 @@
       // Reset inline styles
       const allContent = activeSection.querySelectorAll('h3, h4, p, ul, article, li, time');
       allContent.forEach(el => {
-        el.style.opacity = '';
+        el.style.display = '';
       });
     }, 300);
 

@@ -46,6 +46,7 @@ body {
   position: relative;
   overflow-x: hidden;
   min-height: 100vh;
+  cursor: none;
 }
 
 /* Scanline overlay */
@@ -188,7 +189,6 @@ h2.subtitle {
 #terminal-menu li {
   padding: var(--spacing-xs) var(--spacing-md);
   margin-bottom: var(--spacing-xs);
-  cursor: pointer;
   transition: all 0.2s ease;
   position: relative;
 }
@@ -217,17 +217,21 @@ h2.subtitle {
   color: var(--crt-amber);
 }
 
-#terminal-menu li:hover {
-  background: rgba(51, 255, 51, 0.05);
-  text-shadow: 0 0 3px currentColor;
+/* Hover only on mobile where items are clickable */
+@media (max-width: 768px) {
+  #terminal-menu li:hover {
+    background: rgba(51, 255, 51, 0.05);
+    text-shadow: 0 0 3px currentColor;
+  }
 }
 
 #terminal-menu .instructions {
   margin-top: var(--spacing-lg);
   padding-top: var(--spacing-md);
   border-top: 1px dashed var(--crt-green-dim);
-  color: var(--crt-green-dim);
+  color: var(--crt-green);
   font-size: 0.875rem;
+  text-shadow: var(--glow);
 }
 
 #terminal-menu .instructions::before {
@@ -300,6 +304,7 @@ a {
   text-decoration: none;
   text-shadow: var(--glow);
   transition: all 0.2s ease;
+  cursor: pointer;
 }
 
 a:hover {
@@ -427,7 +432,6 @@ footer .silly-note::before {
   background: rgba(51, 255, 51, 0.05);
   color: var(--crt-amber);
   text-shadow: var(--glow);
-  cursor: pointer;
   transition: all 0.2s ease;
   font-family: var(--font-mono);
   font-size: 1rem;
@@ -441,10 +445,13 @@ footer .silly-note::before {
   content: ' ]';
 }
 
-.back-button:hover {
-  background: rgba(51, 255, 51, 0.1);
-  border-color: var(--crt-green-bright);
-  text-shadow: var(--glow-strong);
+/* Hover only on mobile where button is clickable */
+@media (max-width: 768px) {
+  .back-button:hover {
+    background: rgba(51, 255, 51, 0.1);
+    border-color: var(--crt-green-bright);
+    text-shadow: var(--glow-strong);
+  }
 }
 
 .back-button:focus {
@@ -468,7 +475,7 @@ footer .silly-note::before {
   font-family: var(--font-mono);
   font-size: 0.65rem;
   font-weight: 700;
-  cursor: pointer;
+  cursor: pointer !important;
   transition: all 0.2s ease;
   box-shadow: 0 0 10px var(--crt-green), inset 0 0 10px rgba(51, 255, 51, 0.1);
   display: flex;
@@ -520,6 +527,7 @@ footer .silly-note::before {
 @media (max-width: 768px) {
   body {
     padding: var(--spacing-sm);
+    cursor: auto;
   }
 
   header,
@@ -554,5 +562,13 @@ footer .silly-note::before {
 
   #terminal-menu .instructions {
     font-size: 0.75rem;
+  }
+
+  #terminal-menu li {
+    cursor: pointer;
+  }
+
+  .back-button {
+    cursor: pointer;
   }
 }
