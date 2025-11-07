@@ -16,5 +16,7 @@
   // 2) Expose a teardown hook that removes the listener
   window.themeTeardown = function() {
     document.removeEventListener("mousemove", mouseTrailHandler);
+    // Clean up any lingering trail images
+    document.querySelectorAll('.trail').forEach(img => img.remove());
   };
 })();

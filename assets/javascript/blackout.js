@@ -15,6 +15,9 @@
     document.removeEventListener('mousemove', onMouseMove);
     // restore cursor if desired
     document.body.style.cursor = '';
+    // clean up CSS variables
+    document.documentElement.style.removeProperty('--spot-x');
+    document.documentElement.style.removeProperty('--spot-y');
   };
 
   // initialize spotlight at center

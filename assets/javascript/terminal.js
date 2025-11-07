@@ -667,7 +667,41 @@
       el.remove();
     });
 
-    // Reset section states
-    hideAllSections();
+    // Reset section states and clean up ALL inline styles
+    sections.forEach(section => {
+      const el = document.getElementById(section.id) ||
+                 document.querySelector(`.${section.class}`);
+      if (el) {
+        el.classList.remove('active');
+        el.style.opacity = '';
+        el.style.display = '';
+        el.style.transition = '';
+
+        // Reset all content element inline styles
+        const allContent = el.querySelectorAll('h3, h4, p, ul, article, li, time, a, em');
+        allContent.forEach(contentEl => {
+          contentEl.style.opacity = '';
+          contentEl.style.display = '';
+          contentEl.style.transition = '';
+        });
+
+        // Restore original content if stored
+        if (el.dataset.originalContent) {
+          el.innerHTML = el.dataset.originalContent;
+          delete el.dataset.originalContent;
+        }
+      }
+    });
+
+    // Unhide footer
+    const footer = document.querySelector('footer');
+    if (footer) {
+      footer.classList.remove('hidden');
+      footer.style.display = '';
+    }
+
+    // Reset global state
+    isInSection = false;
+    currentIndex = 0;
   };
 })();
