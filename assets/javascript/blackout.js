@@ -17,9 +17,9 @@
     document.body.style.cursor = '';
   };
 
-  // initialize spotlight in center
+  // initialize spotlight at center
   onMouseMove({
-    clientX: window.innerWidth  - 20,
+    clientX: window.innerWidth - 20,
     clientY: window.innerHeight - 20
   });
 })();

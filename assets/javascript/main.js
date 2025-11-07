@@ -2,9 +2,8 @@
 
 // Base theme names (matching your CSS/JS filenames)
 const themes = [
+  "modern",
   "classic",
-  //  "modern",
-  // "chatgpt",
   "blackout"
 ];
 
@@ -52,11 +51,17 @@ document.addEventListener("DOMContentLoaded", () => {
   let current = themes[0];
   applyTheme(current);
 
-  // 2) On button click → pick a different random theme
+  // 2) On button click → pick a different random theme and scroll to top
   btn.addEventListener("click", () => {
     const others = themes.filter(n => n !== current);
     const next   = others[Math.floor(Math.random() * others.length)];
     current      = next;
     applyTheme(next);
+
+    // Scroll to top smoothly
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   });
 });
