@@ -300,14 +300,21 @@ p {
 
 /* Links */
 a {
-  color: var(--crt-amber);
-  text-decoration: none;
+  color: var(--crt-green);
+  text-decoration: underline;
   text-shadow: var(--glow);
   transition: all 0.2s ease;
   cursor: pointer;
 }
 
 a:hover {
+  color: var(--crt-green-bright);
+  text-shadow: var(--glow-strong);
+}
+
+a:focus {
+  outline: 2px solid var(--crt-amber);
+  outline-offset: 2px;
   color: var(--crt-green-bright);
   text-shadow: var(--glow-strong);
 }
@@ -381,7 +388,7 @@ ul {
 }
 
 /* Text utilities */
-.text-grey {
+.text-gr:not(a) {
   color: var(--crt-green-dim);
 }
 

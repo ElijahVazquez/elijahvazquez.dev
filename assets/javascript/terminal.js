@@ -340,18 +340,17 @@
 
     // After all headlines, type body content
     bodyContent.forEach((el, index) => {
+      const hasInlineElements = el.querySelector('a, em') !== null;
       const textLength = el.textContent.length;
       const speed = 20;
       const typingDuration = textLength * speed + 700;
 
       setTimeout(() => {
-        typeElement(el, speed, () => {
-          // Show links and emphasis within after parent is typed
-          const inlineElements = el.querySelectorAll('a, em');
-          inlineElements.forEach(inline => {
-            inline.style.opacity = '1';
-          });
-        });
+        if (hasInlineElements) {
+          typeElementWithInlines(el, speed);
+        } else {
+          typeElement(el, speed);
+        }
       }, delay);
 
       if (el.tagName === 'TIME') {
@@ -360,6 +359,78 @@
         delay += typingDuration + 150;
       }
     });
+  }
+
+  function typeElementWithInlines(element, speed) {
+    // Store the original child nodes before clearing
+    const childNodes = Array.from(element.childNodes);
+
+    // Clear element and show it
+    element.innerHTML = '';
+    element.style.display = 'block';
+
+    // Create blinking cursor
+    const cursor = document.createElement('span');
+    cursor.className = 'typing-cursor';
+    cursor.textContent = '█';
+    element.appendChild(cursor);
+
+    // Blink cursor 3 times before typing
+    let blinkCount = 0;
+    const blinkInterval = setInterval(() => {
+      cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0';
+      blinkCount++;
+      if (blinkCount >= 6) {
+        clearInterval(blinkInterval);
+        cursor.style.opacity = '1';
+        setTimeout(() => {
+          typeNodes(childNodes, 0);
+        }, 100);
+      }
+    }, 100);
+
+    function typeNodes(nodes, nodeIndex) {
+      if (nodeIndex >= nodes.length) {
+        cursor.remove();
+        return;
+      }
+
+      const node = nodes[nodeIndex];
+
+      if (node.nodeType === Node.TEXT_NODE) {
+        // Type text nodes character by character
+        const text = node.textContent;
+        let charIndex = 0;
+
+        function typeChar() {
+          if (charIndex < text.length) {
+            element.insertBefore(document.createTextNode(text.charAt(charIndex)), cursor);
+            charIndex++;
+            setTimeout(typeChar, speed);
+          } else {
+            // Move to next node
+            typeNodes(nodes, nodeIndex + 1);
+          }
+        }
+        typeChar();
+      } else if (node.nodeType === Node.ELEMENT_NODE) {
+        // Fade in element nodes (a, em, etc)
+        const clonedNode = node.cloneNode(true);
+        clonedNode.style.opacity = '0';
+        element.insertBefore(clonedNode, cursor);
+
+        setTimeout(() => {
+          clonedNode.style.opacity = '1';
+        }, 50);
+
+        setTimeout(() => {
+          typeNodes(nodes, nodeIndex + 1);
+        }, 350); // Wait for fade to complete
+      } else {
+        // Skip other node types
+        typeNodes(nodes, nodeIndex + 1);
+      }
+    }
   }
 
   function typeElement(element, speed, callback) {
