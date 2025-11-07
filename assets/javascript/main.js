@@ -5,7 +5,8 @@ const themes = [
   "modern",
   "classic",
   "blackout",
-  "magazine"
+  "magazine",
+  "terminal"
 ];
 
 const linkEl = document.getElementById("theme-stylesheet");
